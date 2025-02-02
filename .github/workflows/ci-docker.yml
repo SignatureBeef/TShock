@@ -10,12 +10,12 @@ jobs:
           {
             name: Windows,
             platforms: windows/amd64,
-            variant: 9.0-nanoserver-ltsc2022
+            variant: '9.0-nanoserver-ltsc2022'
           },
           {
             name: Linux,
             platforms: linux/amd64,linux/arm64,linux/arm/v7,
-            variant: 9.0
+            variant: '9.0'
           }
         ]
     runs-on: ubuntu-latest
