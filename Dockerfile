@@ -1,6 +1,8 @@
 # TARGETPLATFORM and BUILDPLATFORM are automatically filled in by Docker buildx.
 # They should not be set in the global scope manually.
 
+ARG VARIANT=9.0
+
 FROM --platform=${BUILDPLATFORM} mcr.microsoft.com/dotnet/sdk:9.0 AS builder
 
 # Copy build context
@@ -30,7 +32,7 @@ RUN \
   dotnet publish -o output/ -r "${ARCH}" -v m -f net9.0 -c Release -p:PublishSingleFile=true --self-contained false
 
 # Runtime image
-FROM --platform=${TARGETPLATFORM} mcr.microsoft.com/dotnet/runtime:9.0 AS runner
+FROM --platform=${TARGETPLATFORM} mcr.microsoft.com/dotnet/runtime:${VARIANT} AS runner
 WORKDIR /server
 COPY --from=builder /TShock/TShockLauncher/output ./
 
